@@ -108,4 +108,8 @@ return [
 
     'sendmail' => '/usr/sbin/sendmail -bs',
 
+
+
+    'pretend' => true,
+
 ];
