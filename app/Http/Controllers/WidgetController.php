@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Auth;
 class WidgetController extends Controller
 {
 
+    public function __construct()
+    {
+
+        $this->middleware('auth', ['except' => ['index', 'show']] );
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -66,9 +72,18 @@ class WidgetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $slug = '')
     {
-        //
+        $widget = Widget::findOrFail($id);
+
+        if ($widget->slug !== $slug) {
+
+            return Redirect::route('widget.show', ['id' => $widget->id,
+                'slug' => $widget->slug],
+                301);
+        }
+
+        return view('widget.show', compact('widget'));
     }
 
     /**

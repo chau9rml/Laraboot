@@ -44,8 +44,16 @@ Route::group(['middleware' => ['web']], function () {
         'password' => 'Auth\passwordController'
     ]);
 
-    Route::resource('widget', 'WidgetController');
-
     // API routes
     Route::any('api/widget', 'ApiController@widgetData');
+
+    // widget routes
+//    Route::resource('widget', 'WidgetController');
+
+    // widget routes
+    Route::get('widget/create', ['as' => 'widget.create',
+        'uses' => 'WidgetController@create']);
+    Route::get( 'widget/{id}-{slug?}', ['as' => 'widget.show',
+        'uses' => 'WidgetController@show']);
+    Route::resource('widget', 'WidgetController', ['except' => ['show', 'create']]);
 });
