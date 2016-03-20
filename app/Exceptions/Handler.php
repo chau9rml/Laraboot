@@ -3,10 +3,9 @@
 namespace App\Exceptions;
 
 use Exception;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -17,10 +16,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        AuthorizationException::class,
         HttpException::class,
-        ModelNotFoundException::class,
-        ValidationException::class,
     ];
 
     /**
@@ -33,18 +29,59 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $e)
     {
-        parent::report($e);
+        return parent::report($e);
     }
 
     /**
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $e
+     * @param  $e
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $e)
     {
-        return parent::render($request, $e);
+
+        switch($e){
+
+            case ($e instanceof NotFoundHttpException):
+
+                return $this->renderException($e);
+                break;
+
+            case ($e instanceof ModelNotFoundException):
+
+                return $this->renderException($e);
+                break;
+
+            default:
+
+                return parent::render($request, $e);
+
+        }
     }
+
+    protected function renderException($e)
+    {
+
+        switch ($e){
+
+            case ($e instanceof NotFoundHttpException):
+
+                return response()->view('errors.404', [], 404);
+                break;
+
+            case ($e instanceof ModelNotFoundException):
+                return response()->view('errors.404', [], 404);
+                break;
+
+            default:
+                return (new SymfonyDisplayer(config('app.debug')))
+                    ->createResponse($e);
+
+        }
+
+    }
+
+
 }
