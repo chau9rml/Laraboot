@@ -44,7 +44,7 @@
                         <td>{{ $widget->id }} </td>
                         <td> <a href="/widget/{{ $widget->id }}/edit">
                                 {{ $widget->widget_name }}</a></td>
-                        <td>{{ $widget->created_at }}</td>
+                        <td>{{ $widget->showDateCreated($widget->created_at) }}</td>
 
                         <td> <a href="/widget/{{ $widget->id }}/edit">
                                 <button type="button" class="btn btn-default">Edit</button></a></td>

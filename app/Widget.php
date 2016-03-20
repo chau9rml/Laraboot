@@ -4,11 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\ModelTraits\HasModelTrait;
 
 class Widget extends Model
 {
     //
     use SoftDeletes;
+    use HasModelTrait;
 
     /**
      * The attributes that are mass assignable.
