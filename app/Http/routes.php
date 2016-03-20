@@ -43,4 +43,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::controllers([
         'password' => 'Auth\passwordController'
     ]);
+
+    Route::resource('widget', 'WidgetController');
 });
