@@ -27,5 +27,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
     protected $dates = ['deleted_at'];
+
+    public function widgets()
+    {
+        return $this->hasMany('App\Widget');
+    }
 }
 

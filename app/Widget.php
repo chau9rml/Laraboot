@@ -15,7 +15,15 @@ class Widget extends Model
      *
      * @var array
      */
-    protected $fillable = ['widget_name'];
+    protected $fillable = ['widget_name','slug', 'user_id'];
 
     protected $dates = ['deleted_at'];
+
+    /**
+     * Get the user that owns the widget.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }
