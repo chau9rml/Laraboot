@@ -14,6 +14,7 @@ class ApiController extends Controller
     public function widgetData(){
         $result['data'] = DB::table('widgets')
             ->select('id',
+                'slug',
                 'widget_name',
                 'created_at')
             ->get();
