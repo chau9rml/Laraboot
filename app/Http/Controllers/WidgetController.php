@@ -94,7 +94,9 @@ class WidgetController extends Controller
      */
     public function edit($id)
     {
-        //
+        $widget = Widget::findOrFail($id);
+
+        return view('widget.edit', compact('widget'));
     }
 
     /**
@@ -106,7 +108,16 @@ class WidgetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'widget_name' => 'required|string|max:40|unique:widgets,widget_name,' .$id
+        ]);
+        $widget = Widget::findOrFail($id);
+        $slug = str_slug($request->widget_name, "-");
+        $widget->update(['widget_name' => $request->widget_name,
+            'slug' => $slug,
+            'user_id' => Auth::id()]);
+        alert()->success('Congrats!', 'You updated a widget');
+        return Redirect::route('widget.show', ['widget' => $widget, 'slug' =>$slug]);
     }
 
     /**
@@ -117,6 +128,8 @@ class WidgetController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Widget::destroy($id);
+        alert()->overlay('Attention!', 'You deleted a widget', 'error');
+        return Redirect::route('widget.index');
     }
 }
