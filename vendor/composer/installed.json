@@ -3777,5 +3777,40 @@
             "gravatar",
             "laravel"
         ]
+    },
+    {
+        "name": "socieboy/alerts",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/socieboy/alerts.git",
+            "reference": "7d4c475ba24013cf2d17f91dcb3d711211e2ec70"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/socieboy/alerts/zipball/7d4c475ba24013cf2d17f91dcb3d711211e2ec70",
+            "reference": "7d4c475ba24013cf2d17f91dcb3d711211e2ec70",
+            "shasum": ""
+        },
+        "time": "2015-11-16 01:11:17",
+        "type": "package",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Socieboy\\Alerts\\": "/src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Francisco Sepulveda",
+                "email": "socieboy@gmail.com"
+            }
+        ],
+        "description": "Laravel Alerts with SweetAlerts"
     }
 ]
