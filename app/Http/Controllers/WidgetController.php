@@ -14,7 +14,7 @@ class WidgetController extends Controller
     {
         return view('widget.index');
     }
-    
+
     public function create()
     {
         return view('widget.create');

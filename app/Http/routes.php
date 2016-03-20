@@ -45,4 +45,7 @@ Route::group(['middleware' => ['web']], function () {
     ]);
 
     Route::resource('widget', 'WidgetController');
+
+    // API routes
+    Route::any('api/widget', 'ApiController@widgetData');
 });
